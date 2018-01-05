@@ -1,17 +1,18 @@
 import React from 'react';
-import { View,FlatList, Text, StyleSheet } from 'react-native';
+import { View,FlatList, Text, StyleSheet,TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-
+import ListItem from './ListItem';
+import { bindActionCreators } from 'redux';
+import { removeItem } from '../action';
+ 
 class ItemList extends React.Component {
     render() {
-        console.log(this.props.dataSource);
         return (
             <View style={styles.container}>
-              <FlatList 
-                data={this.props.dataSource}
-                renderItem={({item}) => { <Text>item.data</Text> }}
-                keyExtractor={(item, index) => index}
-              />
+              <FlatList
+                data={this.props.items}
+                renderItem={({item}) => <ListItem removeItem={this.props.removeItem} data={item.data} id={item.id}/>} 
+                keyExtractor={(item, index) => index} />
             </View>
         );
     }
@@ -19,19 +20,22 @@ class ItemList extends React.Component {
 
 function mapsStateToProps(state) {
     return {
-        dataSource: state.data
+        items: state.items
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+    },
+    list: {
         backgroundColor: 'yellow',
     }
 })
 
-export default connect(mapsStateToProps)(ItemList);
+function mapsDispatchToProps(dispatch) {
+    return bindActionCreators({ removeItem: removeItem }, dispatch);
+}
+export default connect(mapsStateToProps,mapsDispatchToProps)(ItemList);
 
 
