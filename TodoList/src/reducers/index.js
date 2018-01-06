@@ -11,6 +11,8 @@ const dataReducer = (state = [], action) => {
         case 'REMOVE_ITEM': 
             const index = state.findIndex( x => x.id === action.id );
             return [...state.slice(0,index),...state.slice(index+1)];
+        case 'REMOVE_ALL': 
+            return [];
         default:
             return state;
     }

@@ -17,7 +17,7 @@ class App extends React.Component {
                 <Header/>
                     <Input />
                     <ItemList />
-                {/* <Footer/> */}
+                <Footer/>
             </View>
         );
     }

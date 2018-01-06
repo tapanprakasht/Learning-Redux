@@ -10,4 +10,10 @@ export const removeItem = (id) => {
         type: 'REMOVE_ITEM',
         payload: id,
     }
-}
+};
+
+export const removeAllItems = () => {
+    return {
+        type: 'REMOVE_ALL'
+    }
+};
