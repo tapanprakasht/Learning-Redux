@@ -1,4 +1,9 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import { AppRegistry } from "react-native";
+import App from "./src/App";
+import React from "react";
 
-AppRegistry.registerComponent('AddressBook', () => App);
+const AddressBook = () => {
+  return <App />;
+};
+
+AppRegistry.registerComponent("AddressBook", () => AddressBook);
