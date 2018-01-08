@@ -11,12 +11,26 @@ class AddContact extends React.Component {
     headerTitleStyle: { color: "white" }
   };
   componentDidMount() {
-    console.log("Loaded addContact");
+      this.name = '';
+      this.email = '';
+      this.phone = '';
   }
-  showAlert = () => {
+  showSuccessAlert = () => {
     Alert.alert("Message", "New Contact added", [{ text: "OK" }], {
       cancelable: true
     });
+  };
+  showAlert = () => {
+    Alert.alert("Alert", "Fill all require fields", [{ text: "OK" }], {
+      cancelable: true
+    });
+  };
+  checkEmpty = () => {
+    if (this.name == "" || this.email == "" || this.phone == "") {
+      return false;
+    } else {
+      return true;
+    }
   };
   render() {
     return (
@@ -40,12 +54,16 @@ class AddContact extends React.Component {
           style={styles.addButton}
           title="Add Contact"
           onPress={() => {
-            this.props.addContact({
-              name: this.name,
-              email: this.email,
-              phone: this.phone
-            });
-            this.showAlert();
+            if (this.checkEmpty()) {
+              this.props.addContact({
+                name: this.name,
+                email: this.email,
+                phone: this.phone
+              });
+              this.showSuccessAlert();
+            } else {
+              this.showAlert();
+            }
           }}
         />
       </View>
